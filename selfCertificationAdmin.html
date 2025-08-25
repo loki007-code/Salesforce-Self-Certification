@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Self Certifications (Admin)">
+        <div class="slds-grid slds-wrap slds-m-bottom_small">
+            <lightning-input class="slds-col" label="Country" value={filterCountry} onchange={handleFilterChange}></lightning-input>
+            <lightning-input class="slds-col" label="Certified By" value={filterCertifiedBy} onchange={handleFilterChange}></lightning-input>
+            <lightning-combobox class="slds-col" label="Status" value={filterStatus} options={statusOptions} onchange={handleFilterChange}></lightning-combobox>
+            <lightning-button class="slds-col" label="Export CSV" onclick={exportCSV}></lightning-button>
+        </div>
+
+        <lightning-datatable key-field="Id" data={certifications} columns={columns} hide-checkbox-column="true"></lightning-datatable>
+
+        <div class="slds-m-top_medium slds-align_absolute-center">
+            <lightning-button label="Prev" onclick={handlePrev} disabled={page <= 1}></lightning-button>
+            <span class="slds-p-horizontal_small">Page {page} of {totalPages}</span>
+            <lightning-button label="Next" onclick={handleNext} disabled={page >= totalPages}></lightning-button>
+        </div>
+    </lightning-card>
+</template>
