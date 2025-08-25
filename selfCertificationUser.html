@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="My Self Certifications">
+        <lightning-button label="New Certification" slot="actions" onclick={handleOpen}></lightning-button>
+
+        <!-- Data Table -->
+        <lightning-datatable
+            key-field="Id"
+            data={certifications}
+            columns={columns}
+            hide-checkbox-column="true">
+        </lightning-datatable>
+
+        <!-- Pagination -->
+        <div class="slds-m-top_medium slds-align_absolute-center">
+            <lightning-button label="Prev" onclick={handlePrev} disabled={page <= 1}></lightning-button>
+            <span class="slds-p-horizontal_small">Page {page} of {totalPages}</span>
+            <lightning-button label="Next" onclick={handleNext} disabled={page >= totalPages}></lightning-button>
+        </div>
+    </lightning-card>
+
+    <!-- Modal -->
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">New Certification</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input type="date" label="Certification Date" value={certDate} onchange={handleDateChange}></lightning-input>
+                    <lightning-input type="file" label="Upload PDF" accept=".pdf" onchange={handleFileChange}></lightning-input>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={handleClose}></lightning-button>
+                    <lightning-button variant="brand" label="Submit" onclick={handleSubmit}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
